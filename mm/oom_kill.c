@@ -45,7 +45,6 @@
 #include <linux/show_mem_notifier.h>
 #include <linux/psi.h>
 #include <linux/cred.h>
-#include <linux/nmi.h>
 
 #include <asm/tlb.h>
 #include "internal.h"
@@ -617,15 +616,10 @@ static void dump_tasks(struct oom_control *oc)
 		mem_cgroup_scan_tasks(oc->memcg, dump_task, oc);
 	else {
 		struct task_struct *p;
-		int i = 0;
 
 		rcu_read_lock();
-		for_each_process(p) {
-			/* Avoid potential softlockup warning */
-			if ((++i & 1023) == 0)
-				touch_softlockup_watchdog();
+		for_each_process(p)
 			dump_task(p, oc);
-		}
 		rcu_read_unlock();
 	}
 }
