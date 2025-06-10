@@ -1208,7 +1208,7 @@ config CHECKPOINT_RESTORE
 config SCHED_CASS
 	bool "Capacity Aware Superset Scheduler"
 	depends on SMP
-	default y
+	default n
 	help
 	  This enables the Capacity Aware Superset Scheduler (CASS), which
 	  optimizes runqueue selection of CFS tasks. By using CPU capacity as a
