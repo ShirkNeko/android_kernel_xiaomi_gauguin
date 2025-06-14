@@ -1400,8 +1400,7 @@ config HAVE_DEBUG_BUGVERBOSE
 	bool
 
 config DEBUG_BUGVERBOSE
-	bool "Verbose BUG() reporting (adds 70K)" if EXPERT
-	depends on BUG && (GENERIC_BUG || HAVE_DEBUG_BUGVERBOSE)
+	bool "Verbose BUG() reporting (adds 70K)"
 	default n
 	help
 	  Say Y here to make BUG() panics output the file name and line number
@@ -1410,7 +1409,7 @@ config DEBUG_BUGVERBOSE
 
 config DEBUG_LIST
 	bool "Debug linked list manipulation"
-	depends on DEBUG_KERNEL || BUG_ON_DATA_CORRUPTION
+	default n
 	help
 	  Enable this to turn on extended checks in the linked-list
 	  walking routines.
@@ -1419,7 +1418,6 @@ config DEBUG_LIST
 
 config DEBUG_PI_LIST
 	bool "Debug priority linked list manipulation"
-	depends on DEBUG_KERNEL
 	help
 	  Enable this to turn on extended checks in the priority-ordered
 	  linked-list (plist) walking routines.  This checks the entire
@@ -2092,6 +2090,7 @@ endif # RUNTIME_TESTING_MENU
 config MEMTEST
 	bool "Memtest"
 	depends on HAVE_MEMBLOCK
+	default n
 	---help---
 	  This option adds a kernel parameter 'memtest', which allows memtest
 	  to be set.
@@ -2103,7 +2102,7 @@ config MEMTEST
 
 config BUG_ON_DATA_CORRUPTION
 	bool "Trigger a BUG when data corruption is detected"
-	select DEBUG_LIST
+	default n
 	help
 	  Select this option if the kernel should BUG when it encounters
 	  data corruption in kernel memory structures when they get checked
@@ -2113,6 +2112,7 @@ config BUG_ON_DATA_CORRUPTION
 
 config PANIC_ON_DATA_CORRUPTION
 	bool "Cause a Kernel Panic When Data Corruption is detected"
+	default n
 	help
 	 Select this option to upgrade warnings for potentially
 	 recoverable data corruption scenarios to system-halting panics,

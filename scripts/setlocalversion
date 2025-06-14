@@ -17,8 +17,8 @@ usage() {
 
 scm_only=false
 srctree=.
-android_release=
-kmi_generation=
+android_release=android12
+kmi_generation=9
 if test "$1" = "--save-scmversion"; then
 	scm_only=true
 	shift
@@ -33,7 +33,7 @@ if test $# -gt 0; then
 	android_release=`echo "$1" | sed -e '/android[0-9]\{2,\}/!{q255}; \
 		s/^\(android[0-9]\{2,\}\)-.*/\1/'`
 	if test $? -ne 0; then
-		android_release=
+		android_release=12
 	fi
 	shift
 
@@ -78,7 +78,7 @@ scm_version()
 			# If only the short version is requested, don't bother
 			# running further git commands
 			if $short; then
-				echo "+"
+				echo ""
 				return
 			fi
 			# If we are past a tagged commit (like
@@ -87,8 +87,8 @@ scm_version()
 				echo "$atag" | awk -F- '{printf("-%05d", $(NF-1))}'
 			fi
 
-			# Add -g and exactly 12 hex chars.
-			printf '%s%s' -g "$(echo $head | cut -c1-12)"
+			# Add -g and exactly 7 hex chars.
+			printf '%s%s' -g "$(echo $head | cut -c1-7)"
 		fi
 
 		# Check for uncommitted changes.
