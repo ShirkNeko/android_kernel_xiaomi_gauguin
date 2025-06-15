@@ -16,9 +16,9 @@ usage() {
 }
 
 scm_only=false
-srctree=.
-android_release=android12
-kmi_generation=9
+srctree=
+android_release=Menhera_Chan
+kmi_generation=
 if test "$1" = "--save-scmversion"; then
 	scm_only=true
 	shift
