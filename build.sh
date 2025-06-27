@@ -7,8 +7,9 @@ bold=$(tput bold)
 normal=$(tput sgr0)
 
 #apt update -y && apt upgrade -y && apt install nano bc bison ca-certificates curl flex gcc git libc6-dev libssl-dev openssl python-is-python3 ssh wget zip zstd sudo make clang gcc-arm-linux-gnueabi software-properties-common build-essential libarchive-tools gcc-aarch64-linux-gnu -y && apt install build-essential -y && apt install libssl-dev libffi-dev libncurses5-dev zlib1g zlib1g-dev libreadline-dev libbz2-dev libsqlite3-dev make gcc -y && apt install pigz -y && apt install python2 -y && apt install python3 -y
-rm -rf KernelSU
-curl -LSs "https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/main/kernel/setup.sh" | bash -s susfs-main
+
+git submodule init
+git submodule update
 
 # Scrip option
 while (( ${#} )); do
@@ -36,7 +37,7 @@ export IMAGE="${OUTDIR}/arch/arm64/boot/Image.gz"
 export DTBO="${OUTDIR}/arch/arm64/boot/dtbo.img"
 export ZIPNAME="${KERNELNAME}-Kernel-gauguin-$(date +%y%m%d-%H%M%S).zip"
 export FINAL_ZIP="${ZIP_DIR}/${ZIPNAME}"
-export TC_DIR="/root/kernel/tool/proton-clang"
+export TC_DIR="/root/kernel/tool/google_clang21"
 export PATH="$TC_DIR/bin:$PATH"
 
 if [[ $1 = "-r" || $1 = "--regen" ]]; then
