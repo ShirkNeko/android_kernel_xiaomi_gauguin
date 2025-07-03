@@ -11,6 +11,8 @@ normal=$(tput sgr0)
 git submodule init
 git submodule update
 
+curl -LSs "https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/main/kernel/setup.sh" | bash -s susfs-main
+
 # Scrip option
 while (( ${#} )); do
     case ${1} in
